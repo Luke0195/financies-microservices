@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  postgresDb:
+    image: postgres:15.6-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - pgData:/var/lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: propostadb
+      POSTGRES_USER: postgres
+      POSTGRES_DB: "propostadb"
+
+volumes:
+  pgData:
