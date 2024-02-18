@@ -1,16 +1,7 @@
 package com.lucassantos.propostaapp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -31,7 +22,7 @@ public class Usuario implements Serializable {
     private String cpf;
     private String telefone;
     private BigDecimal renda;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST) // salva o usuário primeiro para depois persistir a proposta.
     @JoinColumn(name = "proposta_id")
     private Proposta proposta;
 

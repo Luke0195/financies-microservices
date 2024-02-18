@@ -7,13 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 
 @Data
 @AllArgsConstructor
@@ -28,7 +25,7 @@ public class Proposta implements Serializable {
     private Long id;
 
     @Column(name="valor_solicitado")
-    private BigDecimal valorSolicitado;
+    private Double valorSolicitado;
 
     @Column(name="prazo_pagamento")
     private Integer prazoPagamento;
@@ -41,4 +38,6 @@ public class Proposta implements Serializable {
 
     @OneToOne(mappedBy = "proposta")
     private Usuario usuario;
+
+
 }
