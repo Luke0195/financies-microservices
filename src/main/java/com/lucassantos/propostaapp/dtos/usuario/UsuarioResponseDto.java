@@ -1,6 +1,7 @@
-package com.lucassantos.propostaapp.dtos;
+package com.lucassantos.propostaapp.dtos.usuario;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.lucassantos.propostaapp.entities.Proposta;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,25 +14,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PropostaResponseDto implements Serializable {
-
+public class UsuarioResponseDto implements Serializable {
     private Long id;
-
     private String nome;
-
     private String sobrenome;
-
-    private String telefone;
-
     private String cpf;
-
+    private String telefone;
     private BigDecimal renda;
-
-    @JsonProperty("valor_solicitado")
-    private Double valorSolicitado;
-
-    private Boolean aprovado;
-
-    private String observacao;
-
+    private Proposta proposta;
 }

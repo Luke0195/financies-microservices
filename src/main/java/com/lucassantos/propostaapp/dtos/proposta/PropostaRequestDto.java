@@ -1,4 +1,4 @@
-package com.lucassantos.propostaapp.dtos;
+package com.lucassantos.propostaapp.dtos.proposta;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;

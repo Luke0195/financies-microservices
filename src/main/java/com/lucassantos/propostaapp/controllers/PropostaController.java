@@ -1,7 +1,7 @@
 package com.lucassantos.propostaapp.controllers;
 
-import com.lucassantos.propostaapp.dtos.PropostaRequestDto;
-import com.lucassantos.propostaapp.dtos.PropostaResponseDto;
+import com.lucassantos.propostaapp.dtos.proposta.PropostaRequestDto;
+import com.lucassantos.propostaapp.dtos.proposta.PropostaResponseDto;
 import com.lucassantos.propostaapp.services.impl.PropostaServiceImpl;
 
 import lombok.AllArgsConstructor;

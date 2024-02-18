@@ -1,8 +1,8 @@
 package com.lucassantos.propostaapp.mapper;
 
 
-import com.lucassantos.propostaapp.dtos.PropostaRequestDto;
-import com.lucassantos.propostaapp.dtos.PropostaResponseDto;
+import com.lucassantos.propostaapp.dtos.proposta.PropostaRequestDto;
+import com.lucassantos.propostaapp.dtos.proposta.PropostaResponseDto;
 import com.lucassantos.propostaapp.entities.Proposta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
