@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/proposta")
 public class PropostaController {
 
-
     private final PropostaServiceImpl propostaServiceImpl;
     @PostMapping
     public ResponseEntity<PropostaResponseDto> criarProposta(@RequestBody PropostaRequestDto requestDto){

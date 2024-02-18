@@ -22,8 +22,7 @@ public class Usuario implements Serializable {
     private String cpf;
     private String telefone;
     private BigDecimal renda;
-    @OneToOne(cascade = CascadeType.PERSIST) // salva o usuário primeiro para depois persistir a proposta.
-    @JoinColumn(name = "proposta_id")
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Proposta proposta;
 
 }
