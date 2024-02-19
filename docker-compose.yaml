@@ -12,6 +12,25 @@ services:
       POSTGRES_PASSWORD: propostadb
       POSTGRES_USER: postgres
       POSTGRES_DB: "propostadb"
+    networks:
+      - postgres-network
+
+  pgadmin:
+     image: dpage/pgadmin4
+     restart: always
+     environment:
+       PGADMIN_DEFAULT_EMAIL: 'user@mail.com'
+       PGADMIN_DEFAULT_PASSWORD: 'user'
+     ports:
+       - '8083:80'
+     depends_on:
+       - postgresDb
+     networks:
+      -  postgres-network
 
 volumes:
   pgData:
+
+networks:
+  postgres-network:
+     driver: bridge

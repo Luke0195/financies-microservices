@@ -33,5 +33,9 @@ public class PropostaResponseDto implements Serializable {
     private Boolean aprovado;
 
     private String observacao;
+    @JsonProperty("prazo_pagamento")
+    private Integer prazoPagamento;
+
+
 
 }
