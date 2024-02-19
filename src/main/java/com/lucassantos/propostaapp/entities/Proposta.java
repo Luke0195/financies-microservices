@@ -1,7 +1,10 @@
 package com.lucassantos.propostaapp.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -11,17 +14,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="tb_proposta")
+@Table(name = "tb_proposta")
 public class Proposta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="valor_solicitado")
+    @Column(name = "valor_solicitado")
     private Double valorSolicitado;
 
-    @Column(name="prazo_pagamento")
+    @Column(name = "prazo_pagamento")
     private Integer prazoPagamento;
 
     private Boolean aprovada;
@@ -30,8 +33,8 @@ public class Proposta implements Serializable {
 
     private String observacao;
 
-    @OneToOne(cascade =  CascadeType.ALL)
-    @JoinColumn(name="usuario_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
 

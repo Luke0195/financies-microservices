@@ -1,8 +1,7 @@
 package com.lucassantos.propostaapp.dtos.usuario;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.lucassantos.propostaapp.entities.Proposta;
-import jakarta.persistence.Column;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

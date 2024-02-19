@@ -33,5 +33,7 @@ public class PropostaResponseDto implements Serializable {
     private Boolean aprovado;
 
     private String observacao;
+    @JsonProperty("user_id")
+    private Long userId;
 
 }

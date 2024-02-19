@@ -8,12 +8,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public final class HttpResponseErrorFactory {
-    private HttpResponseErrorFactory(){}
+    private HttpResponseErrorFactory() {
+    }
 
 
     public static HttpResponseErrorDto makeHttpResponseError(
             Integer status, String error, String exceptionMessage,
-            String requestUrl, List<FieldValidation> errors){
+            String requestUrl, List<FieldValidation> errors) {
         return HttpResponseErrorDto
                 .builder()
                 .timestamp(LocalDateTime.now())

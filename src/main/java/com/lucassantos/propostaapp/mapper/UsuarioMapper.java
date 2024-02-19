@@ -9,11 +9,11 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface UsuarioMapper {
-    UsuarioMapper INSTANCE = Mappers.getMapper( UsuarioMapper.class);
+    UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "proposta.id", source = "propostaId")
     Usuario convertDtoToUsuario(UsuarioRequestDto usuarioRequestDto);
-
 
 
     UsuarioResponseDto convertEntityToUsuarioResponseDto(Usuario entity);

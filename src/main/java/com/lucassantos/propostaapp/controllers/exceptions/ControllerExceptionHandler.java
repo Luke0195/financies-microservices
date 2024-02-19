@@ -32,7 +32,7 @@ public class ControllerExceptionHandler {
         HttpResponseErrorDto httpResponseErrorDto = HttpResponseErrorFactory
                 .makeHttpResponseError(
                         BADREQUEST,
-                 "Fails to validate fields check the errors_fields list",
+                        "Fails to validate fields check the errors_fields list",
                         "Hibernate Validation Exception",
                         request.getRequestURI(),
                         errors);
@@ -40,14 +40,14 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(ResourceAlreadyExists.class)
-    public ResponseEntity<HttpResponseErrorDto> entityAlreadyExists(HttpServletRequest request, ResourceAlreadyExists exceptionMessage){
+    public ResponseEntity<HttpResponseErrorDto> entityAlreadyExists(HttpServletRequest request, ResourceAlreadyExists exceptionMessage) {
         HttpResponseErrorDto httpResponseErrorDto = HttpResponseErrorFactory
                 .makeHttpResponseError(
                         BADREQUEST,
                         "Entity already exists!",
                         exceptionMessage.getMessage(),
                         request.getRequestURI(),
-                        null );
+                        null);
         return ResponseEntity.status(BADREQUEST).body(httpResponseErrorDto);
     }
 }

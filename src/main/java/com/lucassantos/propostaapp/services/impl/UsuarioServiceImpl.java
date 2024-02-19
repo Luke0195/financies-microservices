@@ -14,16 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-public class UsuarioServiceImpl  implements UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+
     @Override
     @Transactional
     public UsuarioResponseDto create(UsuarioRequestDto usuarioRequestDto) {
-       var userAlreadyExists = usuarioRepository.findByCpf(usuarioRequestDto.getCpf());
-       if (userAlreadyExists != null) throw new ResourceAlreadyExists("This cpf is already taken");
-       Usuario createdUser = UsuarioMapper.INSTANCE.convertDtoToUsuario(usuarioRequestDto);
-       createdUser = usuarioRepository.save(createdUser);
-       return UsuarioMapper.INSTANCE.convertEntityToUsuarioResponseDto(createdUser);
+        var userAlreadyExists = usuarioRepository.findByCpf(usuarioRequestDto.getCpf());
+        if (userAlreadyExists != null) throw new ResourceAlreadyExists("This cpf is already taken");
+        Usuario createdUser = UsuarioMapper.INSTANCE.convertDtoToUsuario(usuarioRequestDto);
+        createdUser = usuarioRepository.save(createdUser);
+        return UsuarioMapper.INSTANCE.convertEntityToUsuarioResponseDto(createdUser);
     }
 }

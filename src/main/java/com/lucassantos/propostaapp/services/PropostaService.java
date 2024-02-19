@@ -5,5 +5,5 @@ import com.lucassantos.propostaapp.dtos.proposta.PropostaResponseDto;
 
 public interface PropostaService {
 
-    public PropostaResponseDto create(PropostaRequestDto propostaRequestDto);
+    PropostaResponseDto create(PropostaRequestDto propostaRequestDto);
 }
