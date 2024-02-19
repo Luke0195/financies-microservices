@@ -25,7 +25,7 @@ public class Usuario implements Serializable {
     private String cpf;
     private String telefone;
     private BigDecimal renda;
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "usuario")
     private Proposta proposta;
 
 }

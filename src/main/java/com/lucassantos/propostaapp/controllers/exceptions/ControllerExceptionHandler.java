@@ -3,6 +3,7 @@ package com.lucassantos.propostaapp.controllers.exceptions;
 import com.lucassantos.propostaapp.controllers.exceptions.dtos.FieldValidation;
 import com.lucassantos.propostaapp.controllers.exceptions.dtos.HttpResponseErrorDto;
 import com.lucassantos.propostaapp.services.exceptions.ResourceAlreadyExists;
+import com.lucassantos.propostaapp.services.exceptions.ResourceNotExistsException;
 import com.lucassantos.propostaapp.utils.factories.HttpResponseErrorFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpServerErrorException;
 
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ControllerExceptionHandler {
 
     private static final Integer BADREQUEST = HttpStatus.BAD_REQUEST.value();
+    private static final Integer NOTFOUND = HttpStatus.NOT_FOUND.value();
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<HttpResponseErrorDto> validationHibernateFields(HttpServletRequest request, MethodArgumentNotValidException e) {
@@ -28,7 +31,6 @@ public class ControllerExceptionHandler {
             String fieldDescription = x.getDefaultMessage();
             errors.add(FieldValidation.builder().fieldName(fieldName).fieldDescription(fieldDescription).build());
         });
-
         HttpResponseErrorDto httpResponseErrorDto = HttpResponseErrorFactory
                 .makeHttpResponseError(
                         BADREQUEST,
@@ -48,6 +50,18 @@ public class ControllerExceptionHandler {
                         exceptionMessage.getMessage(),
                         request.getRequestURI(),
                         null);
+        return ResponseEntity.status(BADREQUEST).body(httpResponseErrorDto);
+    }
+
+    @ExceptionHandler(ResourceNotExistsException.class)
+    public ResponseEntity<HttpResponseErrorDto> entityNotFound(HttpServletRequest request, ResourceNotExistsException exceptionMessage){
+        HttpResponseErrorDto httpResponseErrorDto = HttpResponseErrorFactory
+                .makeHttpResponseError(
+                        NOTFOUND,
+                        "Entity not found!",
+                        exceptionMessage.getMessage(),
+                        request.getRequestURI(),
+                        new ArrayList<>());
         return ResponseEntity.status(BADREQUEST).body(httpResponseErrorDto);
     }
 }

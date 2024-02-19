@@ -33,7 +33,7 @@ public class Proposta implements Serializable {
 
     private String observacao;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST) // Nos permite salvar os dados do usuário sem precisar ter um usuaŕio.
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

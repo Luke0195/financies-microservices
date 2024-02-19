@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @AllArgsConstructor
 @RestController
@@ -24,6 +27,7 @@ public class PropostaController {
     @PostMapping
     public ResponseEntity<PropostaResponseDto> criarProposta(@RequestBody PropostaRequestDto requestDto) {
         PropostaResponseDto responseDto = propostaServiceImpl.create(requestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(responseDto);
     }
 }

@@ -40,9 +40,11 @@ public class PropostaRequestDto implements Serializable {
     @Min(1)
     private Double valorSolicitado;
 
-    @NotNull(message = "The field user_id is required")
-    @JsonProperty("user_id")
-    private Long userId;
+    @NotNull
+    @Min(1)
+    @JsonProperty("prazo_pagamento")
+    private int prazoPagamento;
+
 
 
 }
