@@ -4,7 +4,7 @@ COPY .mvn .mvn
 
 COPY mvnw pom.xml ./
 
-RUN /mvnw -T 4 dependency:go-offline
+RUN ./mvnw -T 4 dependency:go-offline
 
 COPY src ./src
 

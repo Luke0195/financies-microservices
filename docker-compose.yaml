@@ -1,5 +1,4 @@
 version: '3.9'
-
 services:
   postgresDb:
     image: postgres:15.6-alpine
@@ -38,6 +37,26 @@ services:
      environment:
        RABBITMQ_DEFAULT_USER: guest
        RABBITMQ_DEFAULT_PASS: guest
+
+  backend:
+    container_name: msproposta
+    restart: always
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_PASSWORD: propostadb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/propostadb
+      SPRING_RABBITMQ_HOST: localhost
+      SPRING_RABBITMQ_PORT: 5672
+
+    depends_on:
+      - postgresDb
+      - rabbitmq
+    networks:
+      - postgres-network
 
 volumes:
   pgData:
