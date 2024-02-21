@@ -1,7 +1,7 @@
 package com.lucassantos.propostaapp.utils.factories;
 
 import com.lucassantos.propostaapp.controllers.exceptions.dtos.FieldValidation;
-import com.lucassantos.propostaapp.controllers.exceptions.dtos.HttpResponseErrorDto;
+import com.lucassantos.propostaapp.controllers.exceptions.dtos.HttpResponseData;
 
 
 import java.time.LocalDateTime;
@@ -11,11 +11,13 @@ public final class HttpResponseErrorFactory {
     private HttpResponseErrorFactory() {
     }
 
-
-    public static HttpResponseErrorDto makeHttpResponseError(
+    public static  HttpResponseData makeBadRequestResponseError(HttpResponseData httpResponseData){
+        return httpResponseData;
+    }
+    public static HttpResponseData makeHttpResponseError(
             Integer status, String error, String exceptionMessage,
             String requestUrl, List<FieldValidation> errors) {
-        return HttpResponseErrorDto
+        return HttpResponseData
                 .builder()
                 .timestamp(LocalDateTime.now())
                 .status(status)

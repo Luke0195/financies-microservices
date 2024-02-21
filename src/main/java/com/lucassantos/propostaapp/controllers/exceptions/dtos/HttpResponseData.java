@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class HttpResponseErrorDto implements Serializable {
+public class HttpResponseData implements Serializable {
 
     private LocalDateTime timestamp;
     private Integer status;

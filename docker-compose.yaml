@@ -11,8 +11,9 @@ services:
       POSTGRES_PASSWORD: propostadb
       POSTGRES_USER: postgres
       POSTGRES_DB: "propostadb"
+
     networks:
-      - postgres-network
+      - app-network
 
   pgadmin:
      image: dpage/pgadmin4
@@ -25,42 +26,25 @@ services:
      depends_on:
        - postgresDb
      networks:
-      -  postgres-network
+      -  app-network
 
-  rabbitmq:
-     image: rabbitmq:3-management
-     restart: always
-     networks:
-       - postgres-network
-     ports:
-       - 5672:15672
-     environment:
-       RABBITMQ_DEFAULT_USER: guest
-       RABBITMQ_DEFAULT_PASS: guest
+##  rabbitmq:
+##     image: rabbitmq:3-management
+##     restart: always
+##     networks:
+##       - app-network
+##     ports:
+##       - 5672:5672 #JMS Port
 
-  backend:
-    container_name: msproposta
-    restart: always
-    build:
-      context: .
-    ports:
-      - 8080:8080
-    environment:
-      SPRING_DATASOURCE_PASSWORD: propostadb
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/propostadb
-      SPRING_RABBITMQ_HOST: localhost
-      SPRING_RABBITMQ_PORT: 5672
+##     environment:
+##       RABBITMQ_DEFAULT_USER: guest
+##       RABBITMQ_DEFAULT_PASS: guest
 
-    depends_on:
-      - postgresDb
-      - rabbitmq
-    networks:
-      - postgres-network
+
 
 volumes:
   pgData:
 
 networks:
-  postgres-network:
+  app-network:
      driver: bridge

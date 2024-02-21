@@ -1,6 +1,5 @@
 package com.lucassantos.propostaapp.config;
 
-
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,30 +10,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-// O spring será responsável por gerenciar essa classe
 @Configuration
-public class RabbitMqConfig {
-    // proposta-pendente.ms-notificacao
+public class RabbitMQConfiguration {
     // proposta-concluida.ms-proposta
-    // proposta-concluida.ms-notificacao
+    // proposta-concluida.ms-notificação
+    // proposta-pendente.ms-analise-credito
+    // proposta-pendente.ms-notificação
+
     @Bean
-    public Queue criarFilaPropostaPendenteMsAnaliseCredito(){
+    public Queue queue(){
         return QueueBuilder.durable("proposta-pendente.ms-analise-credito").build();
     }
-    /*
-    private ConnectionFactory connectionFactory;
 
-    public RabbitMqConfig(ConnectionFactory connectionFactory){
-        this.connectionFactory = connectionFactory;
-    }
-     */
     @Bean
     public RabbitAdmin criarRabbitAdmin(ConnectionFactory connectionFactory){
         return new RabbitAdmin(connectionFactory);
     }
 
     @Bean
-    public ApplicationListener<ApplicationReadyEvent> iniciarRabbitAdmin(RabbitAdmin rabbitAdmin){
+    public ApplicationListener<ApplicationReadyEvent> initRabbitMq(RabbitAdmin rabbitAdmin){
         return event -> rabbitAdmin.initialize();
     }
+
+
 }

@@ -1,7 +1,7 @@
 package com.lucassantos.propostaapp.controllers.exceptions;
 
 import com.lucassantos.propostaapp.controllers.exceptions.dtos.FieldValidation;
-import com.lucassantos.propostaapp.controllers.exceptions.dtos.HttpResponseErrorDto;
+import com.lucassantos.propostaapp.controllers.exceptions.dtos.HttpResponseData;
 import com.lucassantos.propostaapp.services.exceptions.ResourceAlreadyExists;
 import com.lucassantos.propostaapp.services.exceptions.ResourceNotExistsException;
 import com.lucassantos.propostaapp.utils.factories.HttpResponseErrorFactory;
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpServerErrorException;
 
 
 import java.util.ArrayList;
@@ -24,14 +23,14 @@ public class ControllerExceptionHandler {
     private static final Integer NOTFOUND = HttpStatus.NOT_FOUND.value();
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<HttpResponseErrorDto> validationHibernateFields(HttpServletRequest request, MethodArgumentNotValidException e) {
+    public ResponseEntity<HttpResponseData> validationHibernateFields(HttpServletRequest request, MethodArgumentNotValidException e) {
         List<FieldValidation> errors = new ArrayList<>();
         e.getFieldErrors().forEach(x -> {
             String fieldName = x.getField();
             String fieldDescription = x.getDefaultMessage();
             errors.add(FieldValidation.builder().fieldName(fieldName).fieldDescription(fieldDescription).build());
         });
-        HttpResponseErrorDto httpResponseErrorDto = HttpResponseErrorFactory
+        HttpResponseData httpResponseErrorDto = HttpResponseErrorFactory
                 .makeHttpResponseError(
                         BADREQUEST,
                         "Fails to validate fields check the errors_fields list",
@@ -42,8 +41,8 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(ResourceAlreadyExists.class)
-    public ResponseEntity<HttpResponseErrorDto> entityAlreadyExists(HttpServletRequest request, ResourceAlreadyExists exceptionMessage) {
-        HttpResponseErrorDto httpResponseErrorDto = HttpResponseErrorFactory
+    public ResponseEntity<HttpResponseData> entityAlreadyExists(HttpServletRequest request, ResourceAlreadyExists exceptionMessage) {
+        HttpResponseData httpResponseErrorDto = HttpResponseErrorFactory
                 .makeHttpResponseError(
                         BADREQUEST,
                         "Entity already exists!",
@@ -54,8 +53,8 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotExistsException.class)
-    public ResponseEntity<HttpResponseErrorDto> entityNotFound(HttpServletRequest request, ResourceNotExistsException exceptionMessage){
-        HttpResponseErrorDto httpResponseErrorDto = HttpResponseErrorFactory
+    public ResponseEntity<HttpResponseData> entityNotFound(HttpServletRequest request, ResourceNotExistsException exceptionMessage){
+        HttpResponseData httpResponseErrorDto = HttpResponseErrorFactory
                 .makeHttpResponseError(
                         NOTFOUND,
                         "Entity not found!",
