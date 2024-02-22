@@ -21,19 +21,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class PropostaServiceImpl implements PropostaService {
 
     private final PropostaRepository propostaRepository;
-
-    @Override
-    @Transactional
+    private final NotificacaoServiceImpl notificacaoServiceImpl;
     public PropostaResponseDto create(PropostaRequestDto propostaRequestDto) {
         Proposta proposta = PropostaMapper.INSTANCE.convertDtoToProposta(propostaRequestDto);
         this.propostaRepository.save(proposta);
-        return PropostaMapper.INSTANCE.convertEntityToPropostaResponseDto(proposta);
+        PropostaResponseDto responseDto = PropostaMapper.INSTANCE.convertEntityToPropostaResponseDto(proposta);
+        notificacaoServiceImpl.notificar(responseDto, "proposta-pendente.ex");
+        return  responseDto;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<PropostaResponseDto> findAllPaged(Pageable pageable) {
         Page<Proposta> propostas = propostaRepository.findAll(pageable);
+
         return propostas.map(PropostaMapper.INSTANCE::convertEntityToPropostaResponseDto);
     }
 }
