@@ -28,18 +28,13 @@ services:
      networks:
       -  app-network
 
-##  rabbitmq:
-##     image: rabbitmq:3-management
-##     restart: always
-##     networks:
-##       - app-network
-##     ports:
-##       - 5672:5672 #JMS Port
-
-##     environment:
-##       RABBITMQ_DEFAULT_USER: guest
-##       RABBITMQ_DEFAULT_PASS: guest
-
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    container_name: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
 
 
 volumes:
